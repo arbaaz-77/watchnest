@@ -10,3 +10,15 @@ export interface MediaItem {
   release_date?: string;
   first_air_date?: string;
 }
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface MediaDetails extends MediaItem {
+  genres: Genre[];
+  runtime?: number; // Movies use runtime
+  episode_run_time?: number[]; // TV shows use episode_run_time
+  status: string;
+  tagline: string;
+}
