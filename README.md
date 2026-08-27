@@ -1,5 +1,9 @@
 # Watchnest
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-View_Site-amber?style=for-the-badge)](https://watchnest-a.netlify.app)
+
+![Watchnest Homepage Screenshot](./public/Screenshot.png)
+
 A full-stack media tracking web application built to discover and track movies and TV shows. Powered by the TMDB API.
 
 ## Tech Stack
@@ -8,6 +12,7 @@ A full-stack media tracking web application built to discover and track movies a
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **Data Provider:** TMDB (The Movie Database) API
+- **Deployment:** Netlify
 
 ## Getting Started
 
