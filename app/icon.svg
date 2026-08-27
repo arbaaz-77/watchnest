@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Outer Nest Arc -->
+  <circle cx="12" cy="12" r="10" stroke="#f59e0b" stroke-width="2" stroke-dasharray="16 8" stroke-linecap="round" />
+  <!-- Inner Nest Arc -->
+  <circle cx="12" cy="12" r="7" stroke="#f59e0b" stroke-width="2" stroke-dasharray="12 6" stroke-linecap="round" transform="rotate(45 12 12)" />
+  <!-- Play Button -->
+  <polygon points="10 8 16 12 10 16 10 8" fill="#f59e0b" />
+</svg>

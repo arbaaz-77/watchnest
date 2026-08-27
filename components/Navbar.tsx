@@ -1,5 +1,6 @@
 // src/components/Navbar.tsx
 import Link from "next/link";
+import Logo from "./Logo";
 
 export default function Navbar() {
   return (
@@ -9,9 +10,10 @@ export default function Navbar() {
         <div className="flex items-center gap-8">
           <Link
             href="/"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 transition hover:opacity-80"
           >
-            <span className="text-2xl font-black tracking-wider text-amber-500">
+            <Logo className="w-8 h-8" />
+            <span className="text-2xl font-black tracking-wider text-amber-500 hidden sm:block">
               WATCHNEST
             </span>
           </Link>
