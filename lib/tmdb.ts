@@ -26,3 +26,24 @@ export async function getTrendingMedia() {
 
   return response.json();
 }
+
+export async function getMediaDetails(mediaType: string, id: string) {
+  const response = await fetch(
+    `${TMDB_API_URL}/${mediaType}/${id}?language=en-US`,
+    {
+      headers: getHeaders(),
+      next: { revalidate: 3600 },
+    },
+  );
+
+  if (!response.ok) {
+    const errorDetails = await response.text();
+    console.error("TMDB API Error Details:", {
+      status: response.status,
+      body: errorDetails,
+    });
+    throw new Error(`Failed to fetch details for ${mediaType} ${id}`);
+  }
+
+  return response.json();
+}
