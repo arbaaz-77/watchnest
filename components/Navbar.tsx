@@ -1,4 +1,3 @@
-// src/components/Navbar.tsx
 import Link from "next/link";
 import Logo from "./Logo";
 
