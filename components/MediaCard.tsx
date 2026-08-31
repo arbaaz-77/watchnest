@@ -6,6 +6,10 @@ export default function MediaCard({ item }: { item: MediaItem }) {
   // TMDB uses 'title' for movies and 'name' for TV shows
   const title = item.title || item.name || "Untitled";
 
+  // Extract the 4-digit year from the release date strings
+  const releaseDate = item.release_date || item.first_air_date || "";
+  const year = releaseDate ? releaseDate.substring(0, 4) : "N/A";
+
   // Construct the full image URL. Use a placeholder if there is no poster.
   const imageUrl = item.poster_path
     ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
@@ -33,6 +37,7 @@ export default function MediaCard({ item }: { item: MediaItem }) {
           <span className="uppercase bg-gray-950 px-2 py-1 rounded-md border border-gray-800">
             {item.media_type}
           </span>
+          <span>{year}</span>
           <span className="flex items-center gap-1">
             ⭐ {item.vote_average?.toFixed(1) || "NR"}
           </span>
