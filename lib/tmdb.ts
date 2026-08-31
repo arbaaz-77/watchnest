@@ -64,3 +64,20 @@ export async function searchMedia(query: string) {
 
   return response.json();
 }
+
+export async function getMediaByType(type: "movie" | "tv") {
+  // Using the discover endpoint sorted by popularity
+  const response = await fetch(
+    `${TMDB_API_URL}/discover/${type}?language=en-US&sort_by=popularity.desc&page=1`,
+    {
+      headers: getHeaders(),
+      next: { revalidate: 3600 },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch popular ${type}s from TMDB`);
+  }
+
+  return response.json();
+}
