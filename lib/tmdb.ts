@@ -47,3 +47,20 @@ export async function getMediaDetails(mediaType: string, id: string) {
 
   return response.json();
 }
+
+export async function searchMedia(query: string) {
+  const response = await fetch(
+    `${TMDB_API_URL}/search/multi?query=${encodeURIComponent(query)}&language=en-US&page=1`,
+    {
+      headers: getHeaders(),
+      // don't want to heavily cache search results as they can be highly variable
+      cache: "no-store",
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to search TMDB for: ${query}`);
+  }
+
+  return response.json();
+}
