@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Watchnest - Track Your Favorite Movies",
+  title: "Watchnest - Track Movies",
   description:
-    "Your personal full-stack media tracker powered by Next.js and TMDB.",
+    "Your personal full-stack movie tracker powered by Next.js and TMDB.",
 };
 
 export default function RootLayout({
@@ -26,6 +27,7 @@ export default function RootLayout({
       >
         <Navbar />
         <div className="flex-1">{children}</div>
+        <Footer />
       </body>
     </html>
   );
