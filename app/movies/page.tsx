@@ -1,27 +1,17 @@
-import { getMediaByType } from "@/lib/tmdb";
+import { getPopularMovies } from "@/lib/tmdb";
 import MediaCard from "@/components/MediaCard";
 import Pagination from "@/components/Pagination";
-import { MediaItem } from "@/types/tmdb";
+import { MovieItem } from "@/types/tmdb";
 
 export default async function MoviesPage({
   searchParams,
 }: {
-  // In Next.js, searchParams gives us access to URL query strings
   searchParams: Promise<{ page?: string }>;
 }) {
   const resolvedParams = await searchParams;
-
-  // Extract the page number from the URL, defaulting to 1 if it doesn't exist
   const currentPage = Number(resolvedParams.page) || 1;
-
-  // Pass the page number to our API function
-  const data = await getMediaByType("movie", currentPage);
-
-  const movies: MediaItem[] =
-    data.results?.map((item: MediaItem) => ({
-      ...item,
-      media_type: "movie",
-    })) || [];
+  const data = await getPopularMovies(currentPage);
+  const movies: MovieItem[] = data.results || [];
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 min-h-screen">
@@ -29,7 +19,7 @@ export default async function MoviesPage({
         <div>
           <h1 className="text-3xl font-bold text-white">Popular Movies</h1>
           <p className="mt-2 text-gray-400">
-            The most watched movies this week.
+            The most watched movies right now.
           </p>
         </div>
       </div>
@@ -43,7 +33,6 @@ export default async function MoviesPage({
         ))}
       </div>
 
-      {/* Render the Pagination component below the grid */}
       {data.total_pages > 1 && (
         <Pagination
           currentPage={currentPage}
