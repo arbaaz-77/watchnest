@@ -1,16 +1,19 @@
 import { searchMedia } from "@/lib/tmdb";
 import MediaCard from "@/components/MediaCard";
+import Pagination from "@/components/Pagination";
 import { MediaItem } from "@/types/tmdb";
 
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q: string }>;
+  searchParams: Promise<{ q?: string; page?: string }>;
 }) {
   const resolvedParams = await searchParams;
   const query = resolvedParams.q;
 
-  // Handle empty searches gracefully
+  // Extract the page parameter
+  const currentPage = Number(resolvedParams.page) || 1;
+
   if (!query) {
     return (
       <main className="mx-auto max-w-7xl px-4 py-16 text-center">
@@ -21,10 +24,9 @@ export default async function SearchPage({
     );
   }
 
-  // Fetch data on the server
-  const data = await searchMedia(query);
+  // Pass both the query and the current page to the API
+  const data = await searchMedia(query, currentPage);
 
-  // Filter out 'person' results (actors/directors) to ensure only map movies and TV shows to the MediaCard
   const results: MediaItem[] =
     data.results?.filter(
       (item: MediaItem) =>
@@ -32,7 +34,7 @@ export default async function SearchPage({
     ) || [];
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 min-h-screen">
+    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 min-h-screen flex flex-col">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-white">
           Search Results for "{query}"
@@ -44,13 +46,25 @@ export default async function SearchPage({
           No movies or TV shows found matching your query.
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-8">
-          {results.map((item) => (
-            <MediaCard
-              key={item.id}
-              item={item}
+        <div className="flex-1">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:gap-8">
+            {results.map((item) => (
+              <MediaCard
+                key={item.id}
+                item={item}
+              />
+            ))}
+          </div>
+
+          {/* Render pagination, passing the searchQuery to preserve it in the URL */}
+          {data.total_pages > 1 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={data.total_pages}
+              basePath="/search"
+              searchQuery={query}
             />
-          ))}
+          )}
         </div>
       )}
     </main>

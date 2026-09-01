@@ -48,9 +48,9 @@ export async function getMediaDetails(mediaType: string, id: string) {
   return response.json();
 }
 
-export async function searchMedia(query: string) {
+export async function searchMedia(query: string, page: number = 1) {
   const response = await fetch(
-    `${TMDB_API_URL}/search/multi?query=${encodeURIComponent(query)}&language=en-US&page=1`,
+    `${TMDB_API_URL}/search/multi?query=${encodeURIComponent(query)}&language=en-US&page=${page}`,
     {
       headers: getHeaders(),
       // don't want to heavily cache search results as they can be highly variable
@@ -65,10 +65,10 @@ export async function searchMedia(query: string) {
   return response.json();
 }
 
-export async function getMediaByType(type: "movie" | "tv") {
+export async function getMediaByType(type: "movie" | "tv", page: number = 1) {
   // Using the discover endpoint sorted by popularity
   const response = await fetch(
-    `${TMDB_API_URL}/discover/${type}?language=en-US&sort_by=popularity.desc&page=1`,
+    `${TMDB_API_URL}/discover/${type}?language=en-US&sort_by=popularity.desc&page=${page}`,
     {
       headers: getHeaders(),
       next: { revalidate: 3600 },
