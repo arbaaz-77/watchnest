@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Watchnest - Track Movies & TV Shows",
+  title: "Watchnest - Track Your Favorite Movies",
   description:
     "Your personal full-stack media tracker powered by Next.js and TMDB.",
 };

@@ -4,7 +4,7 @@
 
 ![Watchnest Homepage Screenshot](./public/Screenshot.png)
 
-A full-stack media tracking web application built to discover and track movies and TV shows. Powered by the TMDB API.
+A full-stack media tracking web application built to discover and track movies. Powered by the TMDB API.
 
 ## Tech Stack
 
